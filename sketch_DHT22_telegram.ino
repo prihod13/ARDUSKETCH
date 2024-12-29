@@ -26,15 +26,15 @@
 DHT dht(DHTPIN, DHTTYPE); 
 // Укажите свои данные сети
 const char* ssid = "Mik_prihod2g";
-const char* password = "pelmeshka1994";
+const char* password = "xxxxxxxxxxx";
 //5118735295
 // Используйте @myidbot, чтобы получить ID пользователя или группы
 // Помните, что бот сможет вам писать только после нажатия
 // вами кнопки /start
-#define CHAT_ID "655168688"
-#define CHAT_ID_2 "5118735295"
+#define CHAT_ID "xxxxxxxxxx"
+#define CHAT_ID_2 "xxxxxxxxx"
 // Запустите бот Telegram
-#define BOTtoken "7940212115:AAE_rgUDU1hlVK9jK1d9n6YtnhOUDWL-8Nk"  // укажите токен бота
+#define BOTtoken "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  // укажите токен бота
 
 #ifdef ESP8266
 X509List cert(TELEGRAM_CERTIFICATE_ROOT);
