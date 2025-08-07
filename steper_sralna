@@ -1,23 +1,7 @@
-
-/*
- Stepper Motor Control - speed control
-
- This program drives a unipolar or bipolar stepper motor.
- The motor is attached to digital pins 8 - 11 of the Arduino.
- A potentiometer is connected to analog input 0.
-
- The motor will rotate in a clockwise direction. The higher the potentiometer value,
- the faster the motor speed. Because setSpeed() sets the delay between steps,
- you may notice the motor is less responsive to changes in the sensor value at
- low speeds.
-
- Created 30 Nov. 2009
- Modified 28 Oct 2010
- by Tom Igoe
-
- */
-
 #include <Stepper.h>
+
+int irsensor= 2;                    // Вывод OUT на модуле подключен к выходу 7 Arduino
+int sensorvalue;    
 
 // средние два пина меняем местами!
 #define DRV_PIN_1 8
@@ -43,6 +27,7 @@ void step(bool dir) {
         case 2: _write4(0, 1, 0, 1); break;
         case 3: _write4(1, 0, 0, 1); break;
     }
+    
 }
 
 void setup() {
@@ -50,23 +35,36 @@ void setup() {
     pinMode(DRV_PIN_2, OUTPUT);
     pinMode(DRV_PIN_3, OUTPUT);
     pinMode(DRV_PIN_4, OUTPUT);
+    Serial.begin(9600);                // Задаем скорость передачи данных
+    pinMode(irsensor,INPUT); 
 }
 
 void loop() {
-    // 500 шагов в одну сторону
-    int steps = 800;
+    sensorvalue=digitalRead(irsensor); // Считываем показания в переменной sensorvalue.
+    Serial.print("Sensor == ");         // Выводим текст
+    Serial.println(sensorvalue); 
+    if (sensorvalue == 0)
+    {
+       int steps = 810; // 780 шагов в одну сторону
+    while (steps--) {
+        step(1);//параметер регулирует направления отсчвета и соответсвено направление открытия тоесть вращения
+        delay(5);
+
+    }
+    delay(5000); 
+
+    //задержка перед открытием
+       steps = 810; // 780 шагов в обратную
     while (steps--) {
         step(0);
         delay(5);
-
-
     }
-    delay(10000);
 
-    // 1000 шагов в обратную
-    steps = 800;
-    while (steps--) {
-        step(1);
-        delay(5);
+    } 
+    else 
+    {
+      delay(1000);
     }
+    
+   
 }
